@@ -8,10 +8,10 @@ import Column from './Column';
 
 
 const mockData = [
-  { name: 'Foobar', items: ['a', 'b'] },
-  { name: 'Interview prep', items: ['a', 'b'] },
-  { name: 'Shopping list', items: ['a', 'b'] },
-  { name: 'another column', items: ['a', 'b'] },
+  { name: 'Foobar', items: ['a', 'b', 'a', 'b'] },
+  { name: 'Interview prep', items: ['a2', 'b2'] },
+  { name: 'Shopping list', items: ['a2', 'b2'] },
+  { name: 'another column', items: ['a2', 'b2'] },
 ];
 
 // basically the controller
@@ -22,6 +22,7 @@ class ColumnsContainer extends React.Component {
       columns: mockData,
     };
     this.addItem = this.addItem.bind(this);
+    this.moveItem = this.moveItem.bind(this);
   }
 
   addItem(columnName, newItem) {
@@ -36,12 +37,22 @@ class ColumnsContainer extends React.Component {
     });
   }
 
+  moveItem(colIdx, itemIdx, change) {
+    const columns = cloneDeep(this.state.columns);
+    const movedItem = columns[colIdx].items.splice(itemIdx, 1).pop();
+    columns[colIdx + change].items.push(movedItem);
+    
+    this.setState({
+      ...this.state,
+      columns,
+    });
+  }
   render() { 
-    console.log('rapelbaum - ColumnsContainer render', this.state.columns);
+    const { columns } = this.state;
     
     return (
       <div className={styles.container}>
-        {this.state.columns.map(column => (
+        {this.state.columns.map((column, colIdx) => (
           <Column
             name={column.name}
             items={column.items}
@@ -49,6 +60,12 @@ class ColumnsContainer extends React.Component {
               const newItem = window.prompt('What is your new card about?');
               this.addItem(column.name, newItem);
             }}
+            moveLeft={colIdx > 0 && (itemIdx => {
+              this.moveItem(colIdx, itemIdx, -1);
+            })}
+            moveRight={colIdx < columns.length - 1 && (itemIdx => {
+              this.moveItem(colIdx, itemIdx, +1);
+            })}
           />
         ))}
       </div>

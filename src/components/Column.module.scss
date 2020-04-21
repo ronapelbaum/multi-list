@@ -10,6 +10,14 @@
 
   .item {
     background-color: white;
+
+    display: flex;
+    justify-content: space-between;
+
+    .itemName {
+      flex-grow: 1;
+      padding: 0px 9px;
+    }
   }
 
 }
