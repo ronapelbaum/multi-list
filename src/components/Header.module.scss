@@ -1,10 +1,5 @@
-$gap-xl: 20px;
-$fs-xl: 32px;
+@import '../common.module.scss';
 
-.flexCenter {
-  display: flex;
-  justify-content: center;
-}
 .header {
   background-color: #282c34;
   color: white;
