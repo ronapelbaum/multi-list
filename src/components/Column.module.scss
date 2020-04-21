@@ -1,3 +1,5 @@
+@import '../common.module.scss';
+
 .column {
 
   & > * {
@@ -5,7 +7,9 @@
   }
 
   .title{
-    background-color: lightgreen;
+    background-color: $dusk;
+    color: white;
+    font-weight: 600;
   }
 
   .item {

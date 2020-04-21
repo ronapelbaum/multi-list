@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './Column.module.scss';
 
 
-const Column = ({ name, items, addItem, moveRight, moveLeft }) => (
+const Column = ({ name, color, items, addItem, moveRight, moveLeft }) => (
   <div className={styles.column}>
-    <div className={styles.title}>{name}</div>
+    <div className={styles.title} style={{backgroundColor: color}}>{name}</div>
     {items && items.map((item, idx) => (
       <div key={item+idx} className={styles.item}>
         { moveLeft && <span onClick={() => moveLeft(idx)}>&lt;</span> }

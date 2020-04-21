@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-
+import * as colors from '../utils/colors';
 import styles from './ColumnsContainer.module.scss';
 import Column from './Column';
 
@@ -19,8 +19,9 @@ class ColumnsContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      columns: mockData,
+      columns: mockData.map((d, i) => ({ ...d, color: colors.color(i) })),
     };
+    
     this.addItem = this.addItem.bind(this);
     this.moveItem = this.moveItem.bind(this);
   }
@@ -55,6 +56,7 @@ class ColumnsContainer extends React.Component {
         {this.state.columns.map((column, colIdx) => (
           <Column
             name={column.name}
+            color={column.color}
             items={column.items}
             addItem={() => {
               const newItem = window.prompt('What is your new card about?');
