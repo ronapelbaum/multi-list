@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  & > * {
+    flex-grow: 1;
+  }
+  
+  // gutter for columns
+  & > * {
+    margin: 25px 0px 25px 25px;
+    flex-grow: 1;
+  }
+  & > *:last-child {
+    margin-right: 25px;
+  }
+
+}

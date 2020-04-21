@@ -1,0 +1,15 @@
+.column {
+
+  & > * {
+    padding: 15px;
+  }
+
+  .title{
+    background-color: lightgreen;
+  }
+
+  .item {
+    background-color: white;
+  }
+
+}
