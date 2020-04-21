@@ -1,0 +1,14 @@
+$gap-xl: 20px;
+$fs-xl: 32px;
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+.header {
+  background-color: #282c34;
+  color: white;
+  font-size: $fs-xl;
+  padding: $gap-xl;
+  
+}
