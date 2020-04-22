@@ -5,7 +5,7 @@ import styles from './App.module.scss'
 
 const App = () => (
   <div className={styles.app}>
-    <Header title="Kremer interview" />
+    <Header title="Multi List" />
     <ColumnsContainer />
   </div>
 );
