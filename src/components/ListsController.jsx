@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
 import * as colors from '../utils/colors';
-import styles from './ColumnsContainer.module.scss';
-import Column from './Column';
+import styles from './ListsController.module.scss';
+import List from './List';
 
 
 const mockData = [
@@ -15,57 +15,57 @@ const mockData = [
 ];
 
 // basically the controller
-class ColumnsContainer extends React.Component {
+class ListsController extends React.Component {
   constructor() {
     super();
     this.state = {
-      columns: mockData.map((d, i) => ({ ...d, color: colors.color(i) })),
+      lists: mockData.map((d, i) => ({ ...d, color: colors.color(i) })),
     };
     
     this.addItem = this.addItem.bind(this);
     this.moveItem = this.moveItem.bind(this);
   }
 
-  addItem(columnName, newItem) {
-    const columns = cloneDeep(this.state.columns);
-    columns.find(d => d.name === columnName)
+  addItem(listName, newItem) {
+    const lists = cloneDeep(this.state.lists);
+    lists.find(d => d.name === listName)
       .items
       .push(newItem);
       
     this.setState({
       ...this.state,
-      columns,
+      lists,
     });
   }
 
   moveItem(colIdx, itemIdx, change) {
-    const columns = cloneDeep(this.state.columns);
-    const movedItem = columns[colIdx].items.splice(itemIdx, 1).pop();
-    columns[colIdx + change].items.push(movedItem);
+    const lists = cloneDeep(this.state.lists);
+    const movedItem = lists[colIdx].items.splice(itemIdx, 1).pop();
+    lists[colIdx + change].items.push(movedItem);
     
     this.setState({
       ...this.state,
-      columns,
+      lists,
     });
   }
   render() { 
-    const { columns } = this.state;
+    const { lists } = this.state;
     
     return (
       <div className={styles.container}>
-        {this.state.columns.map((column, colIdx) => (
-          <Column
-            name={column.name}
-            color={column.color}
-            items={column.items}
+        {this.state.lists.map((list, colIdx) => (
+          <List
+            name={list.name}
+            color={list.color}
+            items={list.items}
             addItem={() => {
               const newItem = window.prompt('What is your new card about?');
-              this.addItem(column.name, newItem);
+              this.addItem(list.name, newItem);
             }}
             moveLeft={colIdx > 0 && (itemIdx => {
               this.moveItem(colIdx, itemIdx, -1);
             })}
-            moveRight={colIdx < columns.length - 1 && (itemIdx => {
+            moveRight={colIdx < lists.length - 1 && (itemIdx => {
               this.moveItem(colIdx, itemIdx, +1);
             })}
           />
@@ -75,4 +75,4 @@ class ColumnsContainer extends React.Component {
   }
 }
 
-export default ColumnsContainer;
+export default ListsController;

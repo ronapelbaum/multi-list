@@ -1,10 +1,12 @@
 .container {
   display: flex;
+
+  // grow all lists
   & > * {
     flex-grow: 1;
   }
   
-  // gutter for columns
+  // gutter all lists
   & > * {
     margin: 25px 0px 25px 25px;
     flex-grow: 1;
