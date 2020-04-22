@@ -1,3 +1,5 @@
+@import '../common.module.scss';
+
 .container {
   display: flex;
 
@@ -8,11 +10,11 @@
   
   // gutter all lists
   & > * {
-    margin: 25px 0px 25px 25px;
+    margin: $gap-xxl 0px $gap-xxl $gap-xxl;
     flex-grow: 1;
   }
   & > *:last-child {
-    margin-right: 25px;
+    margin-right: $gap-xxl;
   }
 
 }

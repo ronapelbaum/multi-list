@@ -3,12 +3,12 @@
 .list {
 
   & > * {
-    padding: 15px;
+    padding: $gap-lg;
   }
 
   .title{
     background-color: $dusk;
-    color: white;
+    color: $white;
     font-weight: 600;
   }
 
@@ -18,9 +18,11 @@
     display: flex;
     justify-content: space-between;
 
+    & > *:not(:first-child) {
+      margin-left: $gap-sm;
+    }
     .itemName {
       flex-grow: 1;
-      padding: 0px 9px;
     }
   }
 
