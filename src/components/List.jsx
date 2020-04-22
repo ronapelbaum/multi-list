@@ -1,6 +1,6 @@
 import React from 'react';
+import classnames from 'classnames';
 import styles from './List.module.scss';
-
 
 const List = ({ name, color, items, addItem, moveRight, moveLeft }) => (
   <div className={styles.list}>
@@ -8,13 +8,13 @@ const List = ({ name, color, items, addItem, moveRight, moveLeft }) => (
     {items && items.map((item, idx) => (
       // TODO fix the key here
       <div key={item+idx} className={styles.item}>
-        { moveLeft && <span onClick={() => moveLeft(idx)}>&lt;</span> }
+        { moveLeft && <span onClick={() => moveLeft(idx)} className={styles.clickable}>&lt;</span> }
         <span className={styles.itemName}>{item}</span>
-        { moveRight && <span onClick={() => moveRight(idx)}>&gt;</span> }
+        { moveRight && <span onClick={() => moveRight(idx)} className={styles.clickable}>&gt;</span> }
       </div>
     ))}
     
-    <div onClick={addItem}>+ Add a Card</div>
+    <div onClick={addItem} className={styles.clickable}>+ Add a Card</div>
   </div>
 );
 

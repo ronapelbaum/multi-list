@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
 import * as colors from '../utils/colors';
 import styles from './ListsController.module.scss';
