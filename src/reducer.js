@@ -11,7 +11,6 @@ const mockData = [
 const initialState = {
   lists: mockData,
 };
-
 const listsReducer = (state = initialState, action) => {
   console.log('rapelbaum - reducer', action);
   
@@ -25,6 +24,15 @@ const listsReducer = (state = initialState, action) => {
       return {
         ...state,
         lists,
+      };
+    case Types.MOVE_ITEM:
+      const lists1 = cloneDeep(state.lists);
+      const movedItem = lists1[action.colIdx].items.splice(action.itemIdx, 1).pop();
+      lists1[action.colIdx + action.change].items.push(movedItem);
+    
+      return {
+        ...state,
+        lists: lists1,
       };
     default:
       return state;
