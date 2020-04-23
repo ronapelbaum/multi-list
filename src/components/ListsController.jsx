@@ -4,6 +4,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import * as colors from '../utils/colors';
 import styles from './ListsController.module.scss';
 import List from './List';
+import { connect } from 'react-redux';
+import { addItem } from '../actions';
 
 
 const mockData = [
@@ -17,24 +19,7 @@ const mockData = [
 class ListsController extends React.Component {
   constructor() {
     super();
-    this.state = {
-      lists: mockData.map((d, i) => ({ ...d, color: colors.color(i) })),
-    };
-    
-    this.addItem = this.addItem.bind(this);
     this.moveItem = this.moveItem.bind(this);
-  }
-
-  addItem(listName, newItem) {
-    const lists = cloneDeep(this.state.lists);
-    lists.find(d => d.name === listName)
-      .items
-      .push(newItem);
-      
-    this.setState({
-      ...this.state,
-      lists,
-    });
   }
 
   moveItem(colIdx, itemIdx, change) {
@@ -48,18 +33,18 @@ class ListsController extends React.Component {
     });
   }
   render() { 
-    const { lists } = this.state;
+    const { lists, addItem } = this.props;
     
     return (
       <div className={styles.container}>
-        {this.state.lists.map((list, colIdx) => (
+        {lists.map((list, colIdx) => (
           <List
             name={list.name}
             color={list.color}
             items={list.items}
             addItem={() => {
               const newItem = window.prompt('What is your new card about?');
-              this.addItem(list.name, newItem);
+              addItem(list.name, newItem);
             }}
             moveLeft={colIdx > 0 && (itemIdx => {
               this.moveItem(colIdx, itemIdx, -1);
@@ -74,4 +59,12 @@ class ListsController extends React.Component {
   }
 }
 
-export default ListsController;
+const mapStateToProps = state => ({
+  lists: state.lists,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addItem: (listName, newItem) => dispatch(addItem(listName, newItem)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListsController);
