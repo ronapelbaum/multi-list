@@ -12,8 +12,6 @@ const initialState = {
   lists: mockData,
 };
 const listsReducer = (state = initialState, action) => {
-  console.log('rapelbaum - reducer', action);
-  
   switch (action.type) {
     case Types.ADD_ITEM:
       const lists = cloneDeep(state.lists);

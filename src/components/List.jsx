@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, IconButton } from '@material-ui/core';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import classnames from 'classnames';
 import styles from './List.module.scss';
 
 const List = ({ name, color, items, addItem, moveRight, moveLeft }) => (

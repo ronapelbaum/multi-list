@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash/cloneDeep';
 import * as colors from '../utils/colors';
 import styles from './ListsController.module.scss';
-import List from './List';
+import * as CustomPropTypes from './proptypes';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
+import List from './List';
 
 const ListsController = ({ lists, addItem, moveItem }) => (
   <div className={styles.container}>
     {lists.map((list, colIdx) => (
       <List
+        key={list.name}
         name={list.name}
         color={list.color}
         items={list.items}
@@ -29,8 +30,14 @@ const ListsController = ({ lists, addItem, moveItem }) => (
   </div>
 );
 
+ListsController.propTypes = {
+  lists: PropTypes.arrayOf(CustomPropTypes.List),
+  addItem: PropTypes.func.isRequired,
+  moveItem: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
-  lists: state.lists,
+  lists: state.lists.map((d, i) => ({ ...d, color: colors.color(i) })),
 });
 
 const mapDispatchToProps = dispatch => ({
